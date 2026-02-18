@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #f0f2f5; padding: 50px; font-family: sans-serif; }
+        .report-card {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .report-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .report-body { padding: 30px; }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .good-box {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="report-card">
+        <div class="report-header">
+            <i class="fas fa-graduation-cap fa-3x mb-2"></i>
+            <h2>{{ student.name }}</h2>
+            <p class="mb-0">Roll No: {{ student.roll_no }} | Sem {{ student.semester }}</p>
+        </div>
+        
+        <div class="report-body">
+            <h5 class="text-muted mb-3">Performance Summary</h5>
+            
+            <div class="stat-row">
+                <span>Attendance</span>
+                <span class="fw-bold">{{ percentage }}%</span>
+            </div>
+            
+            <div class="stat-row">
+                <span>Subject Marks</span>
+                <span class="fw-bold">{{ student.marks }}/100</span>
+            </div>
+
+            <div class="stat-row">
+                <span>AI Remark</span>
+                <span class="badge bg-info text-dark">{{ remark }}</span>
+            </div>
+
+            {% if attendance_warning %}
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i> Warning: Low Attendance!
+                </div>
+            {% else %}
+                <div class="good-box">
+                    <i class="fas fa-check-circle"></i> Attendance is Good
+                </div>
+            {% endif %}
+
+            <div class="text-center mt-4">
+                <a href="{% url 'student_list' %}" class="btn btn-outline-dark w-100">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
